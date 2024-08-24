@@ -2,7 +2,7 @@
 #include <cassert>
 #include <iostream>
 
-void testMatrixAddition() {
+void testMatrix2x2Addition() {
     Matrix2x2 m1(1, 2, 3, 4);
     Matrix2x2 m2(5, 6, 7, 8);
     Matrix2x2 result = m1 + m2;
@@ -12,7 +12,7 @@ void testMatrixAddition() {
     std::cout << "testMatrixAddition passed!" << std::endl;
 }
 
-void testMatrixSubtraction() {
+void testMatrix2x2Subtraction() {
     Matrix2x2 m1(5, 6, 7, 8);
     Matrix2x2 m2(1, 2, 3, 4);
     Matrix2x2 result = m1 - m2;
@@ -22,7 +22,7 @@ void testMatrixSubtraction() {
     std::cout << "testMatrixSubtraction passed!" << std::endl;
 }
 
-void testMatrixMultiplication() {
+void testMatrix2x2Multiplication() {
     Matrix2x2 m1(1, 2, 3, 4);
     Matrix2x2 m2(2, 0, 1, 2);
     Matrix2x2 result = m1 * m2;
@@ -32,7 +32,7 @@ void testMatrixMultiplication() {
     std::cout << "testMatrixMultiplication passed!" << std::endl;
 }
 
-void testMatrixVectorMultiplication() {
+void testMatrix2x2VectorMultiplication() {
     Matrix2x2 m(1, 2, 3, 4);
     Vector2D v(1, 1);
     Vector2D result = m * v;
@@ -41,7 +41,7 @@ void testMatrixVectorMultiplication() {
     std::cout << "testMatrixVectorMultiplication passed!" << std::endl;
 }
 
-void testMatrixDeterminant() {
+void testMatrix2x2Determinant() {
     Matrix2x2 m(1, 2, 3, 4);
     float det = m.determinant();
 
@@ -49,7 +49,7 @@ void testMatrixDeterminant() {
     std::cout << "testMatrixDeterminant passed!" << std::endl;
 }
 
-void testMatrixInverse() {
+void testMatrix2x2Inverse() {
     Matrix2x2 m(4, 7, 2, 6);
     Matrix2x2 inv = m.inverse();
 
@@ -58,7 +58,7 @@ void testMatrixInverse() {
     std::cout << "testMatrixInverse passed!" << std::endl;
 }
 
-void testMatrixTranspose() {
+void testMatrix2x2Transpose() {
     Matrix2x2 m(1, 2, 3, 4);
     Matrix2x2 transposed = m.transpose();
 
@@ -68,13 +68,13 @@ void testMatrixTranspose() {
 }
 
 int testMatrix2x2() {
-    testMatrixAddition();
-    testMatrixSubtraction();
-    testMatrixMultiplication();
-    testMatrixVectorMultiplication();
-    testMatrixDeterminant();
-    testMatrixInverse();
-    testMatrixTranspose();
+    testMatrix2x2Addition();
+    testMatrix2x2Subtraction();
+    testMatrix2x2Multiplication();
+    testMatrix2x2VectorMultiplication();
+    testMatrix2x2Determinant();
+    testMatrix2x2Inverse();
+    testMatrix2x2Transpose();
 
     std::cout << "Matrix2x2 Test's Done\n"<< std::endl;
     return 0;

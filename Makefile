@@ -1,43 +1,34 @@
-# Compiler and flags
+# Define the compiler and flags
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude
 
-# Directories
-SRC_DIR = src
-CORE_DIR = $(SRC_DIR)/core
-TEST_DIR = tests
-OBJ_DIR = obj
+# Define the target executable
+TARGET = obj/AllTests_test
 
-# Source files
-CORE_SRC = $(wildcard $(CORE_DIR)/*.cpp)
-TEST_SRC = $(wildcard $(TEST_DIR)/*.cpp)
+# Define the object files
+OBJ = obj/Matrix2x2.o obj/Matrix3x3.o obj/Vector2D.o obj/Vector3D.o \
+      obj/AllTests.o \
+      obj/Matrix2x2Test.o obj/Matrix3x3Test.o obj/Vector2DTest.o obj/Vector3DTest.o
 
-# Object files
-CORE_OBJ = $(patsubst $(SRC_DIR)/core/%.cpp,$(OBJ_DIR)/%.o,$(CORE_SRC))
-TEST_OBJ = $(patsubst $(TEST_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(TEST_SRC))
+# Default rule
+all: $(TARGET)
 
-# Executable
-TEST_TARGET = obj/AllTests_test
+# Rule to create the obj directory if it doesn't exist
+obj:
+	mkdir -p obj
 
-# Default target
-all: $(TEST_TARGET)
+# Rule to link the object files into the final executable
+$(TARGET): obj $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
 
-# Build the test target
-$(TEST_TARGET): $(CORE_OBJ) $(TEST_OBJ)
-	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(CORE_OBJ) $(TEST_OBJ)
-
-# Object file compilation for core source files
-$(OBJ_DIR)/%.o: $(CORE_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)
+# Rule to compile src/core .cpp files into .o files
+obj/%.o: src/core/%.cpp | obj
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Object file compilation for test source files
-$(OBJ_DIR)/%.o: $(TEST_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)
+# Rule to compile tests .cpp files into .o files
+obj/%.o: tests/%.cpp | obj
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean up object files and executables
+# Clean up build files
 clean:
-	rm -rf $(OBJ_DIR) $(TEST_TARGET)
-
-.PHONY: all clean
+	rm -rf obj/
