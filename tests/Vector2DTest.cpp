@@ -81,6 +81,6 @@ int testVector2D() {
     testVectorMagnitude();
     testVectorDistance();
 
-    std::cout << "Vector2D Test's Done\n" << std::endl;
+    std::cout << "Vector2D Tests Done\n" << std::endl;
     return 0;
 }

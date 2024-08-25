@@ -76,6 +76,6 @@ int testMatrix2x2() {
     testMatrix2x2Inverse();
     testMatrix2x2Transpose();
 
-    std::cout << "Matrix2x2 Test's Done\n"<< std::endl;
+    std::cout << "Matrix2x2 Tests Done\n"<< std::endl;
     return 0;
 }

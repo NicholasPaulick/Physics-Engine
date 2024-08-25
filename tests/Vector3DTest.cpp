@@ -95,6 +95,6 @@ int testVector3D() {
     testVector3DMagnitude();
     testVector3DDistance();
 
-    std::cout << "Vector3D Test's Done\n" << std::endl;
+    std::cout << "Vector3D Tests Done\n" << std::endl;
     return 0;
 }

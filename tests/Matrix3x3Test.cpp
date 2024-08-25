@@ -149,6 +149,6 @@ int testMatrix3x3() {
     testMatrix3x3Inverse();
     testMatrix3x3Transpose();
 
-    std::cout << "Matrix3x3 Test's Done\n" << std::endl;
+    std::cout << "Matrix3x3 Tests Done\n" << std::endl;
     return 0;
 }
