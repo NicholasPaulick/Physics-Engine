@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
-#include "core/Quaternion.h"
+#include "../include/core/Quaternion.h"
 
 void testQuaternionAddition() {
     Quaternion q1(1.0f, 2.0f, 3.0f, 4.0f);
@@ -57,6 +57,6 @@ int testQuaternion() {
     testQuaternionMultiplication();
     testQuaternionConjugate();
     testQuaternionInverse();
-    std::cout << "Quaternion Tests finished" << std::endl;
+    std::cout << "Quaternion Tests finished\n" << std::endl;
     return 0;
 }
