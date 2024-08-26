@@ -39,17 +39,33 @@ Quaternion Quaternion::conjugate() const {
     return Quaternion(w, -x, -y, -z);
 }
 
-float Quaternion::norm() const {
+Quaternion Quaternion::normalize() const {
+    float mag = magnitude();
+    if (mag == 0) {
+        // Handle the case where the quaternion is zero to avoid division by zero
+        return Quaternion(1, 0, 0, 0); // Return a default quaternion or handle as needed
+    }
+    return Quaternion(w / mag, x / mag, y / mag, z / mag);
+}
+
+float Quaternion::magnitude() const {
     return std::sqrt(w * w + x * x + y * y + z * z);
 }
 
 Quaternion Quaternion::inverse() const {
-    float normSquared = norm() * norm();
-    if (normSquared == 0) {
-        throw std::runtime_error("Cannot invert a quaternion with zero norm");
+    float magnitudeSquared = magnitude() * magnitude();
+    if (magnitudeSquared == 0) {
+        throw std::runtime_error("Cannot invert a quaternion with zero magnitude");
     }
-    return conjugate() / normSquared;
+    return conjugate() / magnitudeSquared;
 }
+
+Vector3D Quaternion::operator*(const Vector3D& vec) const {
+    Quaternion qVec(0, vec.getX(), vec.getY(), vec.getZ());
+    Quaternion qRes = *this * qVec * conjugate();
+    return Vector3D(qRes.getX(), qRes.getY(), qRes.getZ());
+}
+
 
 // Getter methods
 float Quaternion::getW() const { return w; }

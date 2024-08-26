@@ -7,11 +7,11 @@ TARGET = obj/AllTests_test
 
 # Define the object files
 OBJ = obj/Matrix2x2.o obj/Matrix3x3.o obj/Vector2D.o obj/Vector3D.o obj/Quaternion.o \
-	  obj/RidgidBody2D.o \
+	  obj/RigidBody2D.o obj/Friction2D.o \
 	  obj/Timer.o \
       obj/AllTests.o \
       obj/Matrix2x2Test.o obj/Matrix3x3Test.o obj/Vector2DTest.o obj/Vector3DTest.o obj/QuaternionTest.o \
-	  obj/RidgidBody2DTest.o \
+	  obj/RigidBody2DTest.o obj/Friction2DTest.o \
 	  obj/TimerTest.o
 
 # Default rule
@@ -25,16 +25,8 @@ obj:
 $(TARGET): obj $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
 
-# Rule to compile src/core .cpp files into .o files
-obj/%.o: src/core/%.cpp | obj
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Rule to compile src/utils .cpp files into .o files
-obj/%.o: src/utils/%.cpp | obj
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Rule to compile src/physics .cpp files into .o files
-obj/%.o: src/physics/%.cpp | obj
+# Rule to compile src/* .cpp files into .o files
+obj/%.o: src/*/%.cpp | obj
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Rule to compile tests .cpp files into .o files

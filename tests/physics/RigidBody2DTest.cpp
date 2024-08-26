@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cassert>
-#include "../include/physics/RidgidBody2D.h"
+#include "../include/physics/RigidBody2D.h"
 
 void testRigidBody2D() {
     RigidBody2D body(Vector2D(0, 0), 2.0f);
@@ -11,8 +11,8 @@ void testRigidBody2D() {
     assert(body.getPosition().getX() == 1.0f);
     assert(body.getPosition().getY() == 1.5f);
     body.update(1.0f);
-    assert(body.getVelocity().getX() == 2.0f);
-    assert(body.getVelocity().getY() == 3.0f);
+    assert(body.getVelocity().getX() == 1.0f);
+    assert(body.getVelocity().getY() == 1.5f);
 
     // Apply a torque of 2 for 1 second
     body.applyTorque(2.0f);

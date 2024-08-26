@@ -1,4 +1,4 @@
-#include "../include/physics/RidgidBody2D.h"
+#include "../include/physics/RigidBody2D.h"
 
 RigidBody2D::RigidBody2D(const Vector2D& position, float mass)
     : position(position), velocity(0, 0), acceleration(0, 0), mass(mass), angle(0), angularVelocity(0), torque(0) {}
@@ -30,4 +30,7 @@ void RigidBody2D::update(float deltaTime) {
     position = position + (velocity * deltaTime);
     angularVelocity += (torque / mass) * deltaTime;
     angle += angularVelocity * deltaTime;
+
+    // Reset acceleration
+    acceleration = Vector2D(0, 0);
 }

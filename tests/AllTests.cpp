@@ -6,7 +6,8 @@
 #include "core/Vector3DTest.h"
 #include "core/QuaternionTest.h"
 #include "utils/TimerTest.h"
-#include "physics/RidgidBody2DTest.h"
+#include "physics/RigidBody2DTest.h"
+#include "physics/Friction2DTest.h"
 
 int main() {
     testMatrix2x2();
@@ -16,6 +17,7 @@ int main() {
     testQuaternion();
     testTimer();
     testRigidBody2D();
+    testFriction2D();
 
     std::cout << "All tests completed." << std::endl;
     return 0;

@@ -41,7 +41,7 @@ void testQuaternionConjugate() {
 void testQuaternionInverse() {
     Quaternion q(1.0f, 2.0f, 3.0f, 4.0f);
     Quaternion inv = q.inverse();
-    Quaternion expected = q.conjugate() * (1.0f / (q.norm() * q.norm()));
+    Quaternion expected = q.conjugate() * (1.0f / (q.magnitude() * q.magnitude()));
     for (int i = 0; i < 4; ++i) {
         assert(std::fabs(inv.getW() - expected.getW()) < 1e-5f);
         assert(std::fabs(inv.getX() - expected.getX()) < 1e-5f);
