@@ -67,6 +67,6 @@ int testTimer() {
     testTimerReset();
     testTimerContinuousRunning();
 
-    std::cout << "All Timer tests passed successfully." << std::endl;
+    std::cout << "Timer tests completed\n" << std::endl;
     return 0;
 }

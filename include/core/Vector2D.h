@@ -25,6 +25,9 @@ public:
     // Distance between two vectors
     static float distance(const Vector2D& a, const Vector2D& b);
 
+    float getX() const;
+    float getY() const;
+
     // Print the vector (for debugging)
     void print() const;
 };

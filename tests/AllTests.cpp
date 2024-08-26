@@ -1,11 +1,12 @@
 // AllTests.cpp
 #include <iostream>
-#include "Matrix2x2Test.h"
-#include "Matrix3x3Test.h"
-#include "Vector2DTest.h"
-#include "Vector3DTest.h"
-#include "QuaternionTest.h"
-#include "TimerTest.h"
+#include "core/Matrix2x2Test.h"
+#include "core/Matrix3x3Test.h"
+#include "core/Vector2DTest.h"
+#include "core/Vector3DTest.h"
+#include "core/QuaternionTest.h"
+#include "utils/TimerTest.h"
+#include "physics/RidgidBody2DTest.h"
 
 int main() {
     testMatrix2x2();
@@ -14,6 +15,7 @@ int main() {
     testVector3D();
     testQuaternion();
     testTimer();
+    testRigidBody2D();
 
     std::cout << "All tests completed." << std::endl;
     return 0;

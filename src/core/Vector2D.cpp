@@ -37,6 +37,14 @@ float Vector2D::distance(const Vector2D& a, const Vector2D& b) {
     return (a - b).magnitude();
 }
 
+float Vector2D::getX() const {
+    return x;
+}
+
+float Vector2D::getY() const {
+    return y;
+}
+
 void Vector2D::print() const {
     std::cout << "Vector2D(" << x << ", " << y << ")" << std::endl;
 }
