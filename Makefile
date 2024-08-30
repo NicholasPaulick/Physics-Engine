@@ -1,41 +1,59 @@
-# Define the compiler and flags
+# Compiler and flags
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude
 
-# Define the target executable
-TARGET = obj/AllTests_test
+# Directories
+SRC = src
+OBJ_DIR = obj
+TEST_DIR = tests
 
-# Define the object files
-OBJ = obj/Matrix2x2.o obj/Vector2D.o \
-	  obj/RigidBody2D.o obj/Friction2D.o \
-	  obj/Timer.o \
-      obj/AllTests.o \
-      obj/Matrix2x2Test.o obj/Vector2DTest.o \
-	  obj/RigidBody2DTest.o obj/Friction2DTest.o \
-	  obj/TimerTest.o
+# Source files
+SRC_FILES = $(wildcard $(SRC)/*/*.cpp)
 
-# Default rule
-all: $(TARGET)
+# Object files for the main library
+OBJS = $(patsubst $(SRC)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-# Rule to create the obj directory if it doesn't exist
-obj:
-	mkdir -p obj
+# Object files for tests
+TEST_SRC_FILES = $(wildcard $(TEST_DIR)/*/*.cpp) $(wildcard $(TEST_DIR)/*.cpp)
+TEST_OBJS = $(patsubst $(TEST_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(TEST_SRC_FILES))
 
-# Rule to link the object files into the final executable
-$(TARGET): obj $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
+# Output library
+LIB = libPhysicsEngine.a
 
-# Rule to compile src/* .cpp files into .o files
-obj/%.o: src/*/%.cpp | obj
+# Test target executable
+TEST_TARGET = $(OBJ_DIR)/AllTests_test
+
+# Default rule to build the library
+all: $(LIB)
+
+# Rule to create the necessary directory structure
+$(OBJ_DIR)/%.o: $(SRC)/%.cpp | create_dirs
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Rule to compile tests .cpp files into .o files
-obj/%.o: tests/*/%.cpp | obj
+# Rule to compile test files into object files
+$(OBJ_DIR)/%.o: $(TEST_DIR)/%.cpp | create_dirs
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-obj/%.o: tests/%.cpp | obj
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+# Create necessary directories for object files
+create_dirs:
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/core
+	@mkdir -p $(OBJ_DIR)/physics
+	@mkdir -p $(OBJ_DIR)/utils
+	@mkdir -p $(OBJ_DIR)/tests
+
+# Rule to create the library
+$(LIB): $(OBJS)
+	ar rcs $@ $^
+
+# Rule to build and run the test executable
+test: $(TEST_TARGET)
+	./$(TEST_TARGET)
+
+# Rule to link test objects into the test executable
+$(TEST_TARGET): $(LIB) $(TEST_OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_OBJS) $(LIB)
 
 # Clean up build files
 clean:
-	rm -rf obj/
+	rm -rf $(OBJ_DIR) $(LIB) $(TEST_TARGET)
