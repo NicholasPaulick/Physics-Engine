@@ -6,11 +6,11 @@ CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude
 TARGET = obj/AllTests_test
 
 # Define the object files
-OBJ = obj/Matrix2x2.o obj/Matrix3x3.o obj/Vector2D.o obj/Vector3D.o obj/Quaternion.o \
+OBJ = obj/Matrix2x2.o obj/Vector2D.o \
 	  obj/RigidBody2D.o obj/Friction2D.o \
 	  obj/Timer.o \
       obj/AllTests.o \
-      obj/Matrix2x2Test.o obj/Matrix3x3Test.o obj/Vector2DTest.o obj/Vector3DTest.o obj/QuaternionTest.o \
+      obj/Matrix2x2Test.o obj/Vector2DTest.o \
 	  obj/RigidBody2DTest.o obj/Friction2DTest.o \
 	  obj/TimerTest.o
 

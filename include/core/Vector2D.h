@@ -1,33 +1,49 @@
 #ifndef VECTOR2D_H
 #define VECTOR2D_H
 
-class Vector2D {
-public:
-    float x, y;
+#include <stdexcept>
 
-    Vector2D(float x = 0.0f, float y = 0.0f);
+class Vector2D {
+private:
+    double x, y;
+
+public:
+    Vector2D(double x = 0.0, double y = 0.0);
 
     // Basic vector operations
     Vector2D operator+(const Vector2D& other) const;
     Vector2D operator-(const Vector2D& other) const;
     Vector2D operator-() const;
-    Vector2D operator*(float scalar) const;
-    Vector2D operator/(float scalar) const;
+    Vector2D operator*(double scalar) const;
+    Vector2D operator/(double scalar) const;
+
+    // Compound assignment operators
+    Vector2D& operator+=(const Vector2D& other);
+    Vector2D& operator-=(const Vector2D& other);
+    Vector2D& operator*=(double scalar);
+    Vector2D& operator/=(double scalar);
 
     // Dot product
-    float dot(const Vector2D& other) const;
+    double dot(const Vector2D& other) const;
+
+    // Cross product (for 2D vectors, returns a scalar)
+    double cross(const Vector2D& other) const;
 
     // Magnitude of the vector
-    float magnitude() const;
+    double magnitude() const;
 
     // Normalize the vector
     Vector2D normalize() const;
 
-    // Distance between two vectors
-    static float distance(const Vector2D& a, const Vector2D& b);
+    // Angle between two vectors
+    double angle(const Vector2D& other) const;
 
-    float getX() const;
-    float getY() const;
+    // Distance between two vectors
+    static double distance(const Vector2D& a, const Vector2D& b);
+
+    // Getters
+    double getX() const;
+    double getY() const;
 
     // Print the vector (for debugging)
     void print() const;

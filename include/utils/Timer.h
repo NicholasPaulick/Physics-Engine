@@ -4,10 +4,11 @@
 #include <chrono>
 #include <string>
 #include <iostream>
+#include <vector>
 
 class Timer {
 public:
-    // Constructor and Destructor
+    // Constructors and Destructor
     Timer();
     explicit Timer(const std::string& name, bool startImmediately = false);
     ~Timer();
@@ -16,6 +17,7 @@ public:
     void start();
     void stop();
     void reset();
+    void lap();
 
     // Elapsed time getters
     double elapsedSeconds() const;
@@ -23,15 +25,26 @@ public:
     double elapsedMicroseconds() const;
     double elapsedNanoseconds() const;
 
-    // Utility method to print elapsed time
+    // Lap time getters
+    std::vector<double> getLapTimes() const;
+
+    // Utility methods
     void printElapsedTime() const;
+    void printLapTimes() const;
+
+    // Getter for name
+    std::string getName() const;
 
 private:
     std::string name_;
-    std::chrono::time_point<std::chrono::high_resolution_clock> startTime_;
-    std::chrono::time_point<std::chrono::high_resolution_clock> endTime_;
+    std::chrono::time_point<std::chrono::steady_clock> startTime_;
+    std::chrono::time_point<std::chrono::steady_clock> endTime_;
+    std::vector<std::chrono::time_point<std::chrono::steady_clock>> lapTimes_;
     bool running_;
     bool hasResult_;
+
+    double calculateDuration(std::chrono::time_point<std::chrono::steady_clock> start,
+                             std::chrono::time_point<std::chrono::steady_clock> end) const;
 };
 
 #endif // TIMER_H
